@@ -228,29 +228,74 @@ a. Setting store details once.
 b. Creating multiple product objects.
 c. Adding them to the store.
 d. Displaying store and product information.
-Also Check how many .class files are generated.
- 
+Also Check how many .class files are generated.*/
+
+import java.util.ArrayList;
 class Store{
-	static String storeName:
+	static String storeName;
 	static String storeLocation;
-	private Product[] things=new Product[100];
-	private int productCount=0;
+	private ArrayList<Product>products;
+	public Store(){
+		products=new ArrayList<>();
+	}
 	public static void setStoreDetails(String name,String location){
-        storeName=name;
-        storeLocation=location;
-    }
-    public static void displayStoreDetails(){
+		storeName=name;
+		storeLocation=location;
+	}
+	public static void displayStoreDetails(){
 		System.out.println("Store Name : " + storeName);
 		System.out.println("Store Location : " + storeLocation);
 	}
 	public void addProduct(Product product){
-		if(productCount < things.length){
-			things[productCount++]=product;
-	    }else{
-			System.out.println(Can't Add More Products");
+		products.add(product);
+    }
+    public void displayAllproducts(){
+		System.out.println("List of Products : ");
+		for(Product p : products){
+			p.displayProduct();
 		}
 	}
-*/
+}
+class Product{
+	private int productID;
+	private String name;
+	private double price;
+	private int quantity;
+	public Product(int productID,String name,double price,int quantity){
+		this.productID=productID;
+		this.name=name;
+		this.price=price;
+		this.quantity=quantity;
+	}
+	public void displayProduct(){
+		System.out.println("Product ID : " + productID);
+		System.out.println("Product Name : " + name);
+		System.out.println("Product's price : " + price);
+		System.out.println("Quantity : " + quantity);
+		System.out.println("================================");
+	}
+}
+public class MainStore{
+	public static void main(String[] args){
+		Store.setStoreDetails("Big Bazzar","Chennai");
+		Store bigStore=new Store();
+		Product p1 = new Product(201,"Chocolates",150.48,20);
+		Product p2 = new Product(201,"Cookies",120.05,32);
+        Product p3 = new Product(201,"Fruits",500,10);
+        Product p4 = new Product(201,"Vegetables",230,15);
+        Product p5 = new Product(201,"Nuts",1000,30);
+		bigStore.addProduct(p1);
+		bigStore.addProduct(p2);
+		bigStore.addProduct(p3);
+		bigStore.addProduct(p4);
+		bigStore.addProduct(p5);
+		Store.displayStoreDetails();
+		bigStore.displayAllproducts();
+	}
+}
+
+ 
+
 
 /* 6.Write a program that would print the information (name, year of joining, salary, address) of three employees by creating a class named 
 'Employee'. The output should be as follows:
